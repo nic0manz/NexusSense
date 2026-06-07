@@ -23,7 +23,7 @@ Sensors, layout, colors and LED bar style are fully configurable via a JSON file
 - [MSI Afterburner](https://www.msi.com/Landing/afterburner) (must be running)
 - Corsair iCUE Nexus Companion (USB HID, VID `0x1b1c` / PID `0x1b8e`)
 - `hidapi.dll` — included in the repo (x64 Windows build from [libusb/hidapi](https://github.com/libusb/hidapi/releases))
-- Windows 10/11 (.NET 10 runtime included in the build output)
+- Windows 10/11 with [.NET 10 runtime](https://dotnet.microsoft.com/en-us/download/dotnet/10.0)
 
 ---
 
