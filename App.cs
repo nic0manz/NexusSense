@@ -106,20 +106,31 @@ public class App
     {
         try
         {
-            foreach (DeviceInfo deviceInfo in Hid.Enumerate())
+            while (!ct.IsCancellationRequested)
             {
-                if (deviceInfo.VendorId  != 0x1b1c ||
-                    deviceInfo.ProductId != 0x1b8e ||
-                    deviceInfo.UsagePage != 12)
-                    continue;
+                bool found = false;
+                try
+                {
+                    foreach (DeviceInfo deviceInfo in Hid.Enumerate())
+                    {
+                        if (deviceInfo.VendorId  != 0x1b1c ||
+                            deviceInfo.ProductId != 0x1b8e ||
+                            deviceInfo.UsagePage != 12)
+                            continue;
 
-                using Device device = deviceInfo.ConnectToDevice();
-                new NexusMonitor(new Nexus(device)).RunLive(1000, ct);
+                        found = true;
+                        using Device device = deviceInfo.ConnectToDevice();
+                        new NexusMonitor(new Nexus(device)).RunLive(1000, ct);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    if (Debug) Console.WriteLine(ex.Message);
+                }
+
+                if (!found && Debug) Console.WriteLine("Nexus not found, retrying in 5s...");
+                Thread.Sleep(5000);
             }
-        }
-        catch (Exception ex)
-        {
-            if (Debug) Console.WriteLine(ex.Message);
         }
         finally
         {
