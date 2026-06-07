@@ -1,0 +1,754 @@
+{
+  "IntervalMs": 250,
+  "Brightness": 100,
+  "Font": "C:\\Windows\\Fonts\\segoeui.ttf",
+  "BoldFont": "C:\\Windows\\Fonts\\segoeuib.ttf",
+  "PageNavigation": "tap",
+  "TapZoneWidth": 128,
+  "Pages": [
+    {
+      "Page": 0,
+      "Background": "#000000",
+      "LabelColor": "#aaaaaa",
+      "ValueColor": "#aaaaaa",
+      "LedColor": "#ff3000",
+      "PanelBorder": "#111111",
+      "LedOffColor": "#2a1000",
+      "LedCount": 14,
+      "LedWidth": 5,
+      "LedGap": 2,
+      "LedHeight": 7,
+      "LedStyle": "bar",
+      "LedGlow": true,
+      "LedHighlight": false,
+      "LedGradientTop": 0.0,
+      "LedGradientMid": 0.0,
+      "LedGradientBottom": 0.0,
+      "Items": [
+        {
+          "SensorName": "CPU usage",
+          "Label": "Load",
+          "X": 0,
+          "Width": 106,
+          "ValueSize": 13,
+          "LabelSize": 13,
+          "LabelBold": true,
+          "ValueBold": true,
+          "Color": "#ffcc00",
+          "Format": "{0:F0}%",
+          "GraphMin": 0,
+          "GraphMax": 100,
+          "Divisor": 1,
+          "DynamicColor": "none",
+          "ColorRanges": [
+            {
+              "UpTo": 50,
+              "Color": "#ffcc00",
+              "OffColor": "#1a1a1a"
+            },
+            {
+              "UpTo": 80,
+              "Color": "#ff7700",
+              "OffColor": "#1a1a1a"
+            },
+            {
+              "UpTo": 100,
+              "Color": "#cc2200",
+              "OffColor": "#1a1a1a"
+            }
+          ],
+          "LabelX": 2,
+          "LabelY": 0,
+          "ValueX": 104,
+          "ValueY": -1,
+          "GraphY": 23,
+          "GraphX": 5
+        },
+        {
+          "SensorName": "GPU usage",
+          "Label": "Load",
+          "X": 0,
+          "Width": 106,
+          "ValueSize": 13,
+          "LabelSize": 13,
+          "LabelBold": true,
+          "ValueBold": true,
+          "Color": "#ffcc00",
+          "Format": "{0:F0}%",
+          "GraphMin": 0,
+          "GraphMax": 100,
+          "Divisor": 1,
+          "DynamicColor": "none",
+          "ColorRanges": [
+            {
+              "UpTo": 50,
+              "Color": "#ffcc00",
+              "OffColor": "#1a1a1a"
+            },
+            {
+              "UpTo": 80,
+              "Color": "#ff7700",
+              "OffColor": "#1a1a1a"
+            },
+            {
+              "UpTo": 100,
+              "Color": "#cc2200",
+              "OffColor": "#1a1a1a"
+            }
+          ],
+          "LabelX": 2,
+          "LabelY": 0,
+          "ValueX": 104,
+          "ValueY": -1,
+          "GraphY": 23,
+          "GraphX": 5
+        },
+        {
+          "SensorName": "CPU temperature",
+          "Label": "Temp",
+          "X": 0,
+          "Width": 106,
+          "ValueSize": 13,
+          "LabelSize": 13,
+          "LabelBold": true,
+          "ValueBold": true,
+          "Color": "#ffcc00",
+          "Format": "{0:F0}°",
+          "GraphMin": 0,
+          "GraphMax": 100,
+          "Divisor": 1,
+          "DynamicColor": "none",
+          "ColorRanges": [
+            {
+              "UpTo": 50,
+              "Color": "#ffcc00",
+              "OffColor": "#1a1a1a"
+            },
+            {
+              "UpTo": 80,
+              "Color": "#ff7700",
+              "OffColor": "#1a1a1a"
+            },
+            {
+              "UpTo": 100,
+              "Color": "#cc2200",
+              "OffColor": "#1a1a1a"
+            }
+          ],
+          "LabelX": 2,
+          "LabelY": 0,
+          "ValueX": 104,
+          "ValueY": -1,
+          "GraphY": 23,
+          "GraphX": 5
+        },
+        {
+          "SensorName": "GPU temperature",
+          "Label": "Temp",
+          "X": 0,
+          "Width": 106,
+          "ValueSize": 13,
+          "LabelSize": 13,
+          "LabelBold": true,
+          "ValueBold": true,
+          "Color": "#ffcc00",
+          "Format": "{0:F0}°",
+          "GraphMin": 0,
+          "GraphMax": 100,
+          "Divisor": 1,
+          "DynamicColor": "none",
+          "ColorRanges": [
+            {
+              "UpTo": 50,
+              "Color": "#ffcc00",
+              "OffColor": "#1a1a1a"
+            },
+            {
+              "UpTo": 80,
+              "Color": "#ff7700",
+              "OffColor": "#1a1a1a"
+            },
+            {
+              "UpTo": 100,
+              "Color": "#cc2200",
+              "OffColor": "#1a1a1a"
+            }
+          ],
+          "LabelX": 2,
+          "LabelY": 0,
+          "ValueX": 104,
+          "ValueY": -1,
+          "GraphY": 23,
+          "GraphX": 5
+        },
+        {
+          "SensorName": "CPU clock",
+          "Label": "Clock",
+          "X": 0,
+          "Width": 106,
+          "ValueSize": 13,
+          "LabelSize": 13,
+          "LabelBold": true,
+          "ValueBold": true,
+          "Color": "#ffcc00",
+          "Format": "{0:F2}GHz",
+          "GraphMin": 0,
+          "GraphMax": 5.1,
+          "Divisor": 1000,
+          "DynamicColor": "none",
+          "ColorRanges": [
+            {
+              "UpTo": 2.5,
+              "Color": "#ffcc00",
+              "OffColor": "#1a1a1a"
+            },
+            {
+              "UpTo": 3.5,
+              "Color": "#ff7700",
+              "OffColor": "#1a1a1a"
+            },
+            {
+              "UpTo": 5.0,
+              "Color": "#cc2200",
+              "OffColor": "#1a1a1a"
+            }
+          ],
+          "LabelX": 2,
+          "LabelY": 0,
+          "ValueX": 104,
+          "ValueY": -1,
+          "GraphY": 23,
+          "GraphX": 5
+        },
+        {
+          "SensorName": "Core clock",
+          "Label": "Clock",
+          "X": 0,
+          "Width": 106,
+          "ValueSize": 13,
+          "LabelSize": 13,
+          "LabelBold": true,
+          "ValueBold": true,
+          "Color": "#ffcc00",
+          "Format": "{0:F0}MHz",
+          "GraphMin": 0,
+          "GraphMax": 3100,
+          "Divisor": 1,
+          "DynamicColor": "none",
+          "ColorRanges": [
+            {
+              "UpTo": 1500,
+              "Color": "#ffcc00",
+              "OffColor": "#1a1a1a"
+            },
+            {
+              "UpTo": 2000,
+              "Color": "#ff7700",
+              "OffColor": "#1a1a1a"
+            },
+            {
+              "UpTo": 3100,
+              "Color": "#cc2200",
+              "OffColor": "#1a1a1a"
+            }
+          ],
+          "LabelX": 2,
+          "LabelY": 0,
+          "ValueX": 104,
+          "ValueY": -1,
+          "GraphY": 23,
+          "GraphX": 5
+        },
+        {
+          "SensorName": "CPU power",
+          "Label": "Power",
+          "X": 0,
+          "Width": 106,
+          "ValueSize": 13,
+          "LabelSize": 13,
+          "LabelBold": true,
+          "ValueBold": true,
+          "Color": "#ffcc00",
+          "Format": "{0:F0}W",
+          "GraphMin": 0,
+          "GraphMax": 150,
+          "Divisor": 1,
+          "DynamicColor": "none",
+          "ColorRanges": [
+            {
+              "UpTo": 50,
+              "Color": "#ffcc00",
+              "OffColor": "#1a1a1a"
+            },
+            {
+              "UpTo": 80,
+              "Color": "#ff7700",
+              "OffColor": "#1a1a1a"
+            },
+            {
+              "UpTo": 150,
+              "Color": "#cc2200",
+              "OffColor": "#1a1a1a"
+            }
+          ],
+          "LabelX": 2,
+          "LabelY": 0,
+          "ValueX": 104,
+          "ValueY": -1,
+          "GraphY": 23,
+          "GraphX": 5
+        },
+        {
+          "SensorName": "Power",
+          "Label": "Power",
+          "X": 0,
+          "Width": 106,
+          "ValueSize": 13,
+          "LabelSize": 13,
+          "LabelBold": true,
+          "ValueBold": true,
+          "Color": "#ffcc00",
+          "Format": "{0:F0}W",
+          "GraphMin": 0,
+          "GraphMax": 350,
+          "Divisor": 1,
+          "DynamicColor": "none",
+          "ColorRanges": [
+            {
+              "UpTo": 50,
+              "Color": "#ffcc00",
+              "OffColor": "#1a1a1a"
+            },
+            {
+              "UpTo": 150,
+              "Color": "#ff7700",
+              "OffColor": "#1a1a1a"
+            },
+            {
+              "UpTo": 300,
+              "Color": "#cc2200",
+              "OffColor": "#1a1a1a"
+            }
+          ],
+          "LabelX": 2,
+          "LabelY": 0,
+          "ValueX": 104,
+          "ValueY": -1,
+          "GraphY": 23,
+          "GraphX": 5
+        },
+        {
+          "SensorName": "RAM usage",
+          "Label": "RAM",
+          "X": 0,
+          "Width": 106,
+          "ValueSize": 13,
+          "LabelSize": 13,
+          "LabelBold": true,
+          "ValueBold": true,
+          "Color": "#ffcc00",
+          "Format": "{0:F1}GB",
+          "GraphMin": 0,
+          "GraphMax": 32,
+          "Divisor": 1024,
+          "DynamicColor": "none",
+          "ColorRanges": [
+            {
+              "UpTo": 16,
+              "Color": "#ffcc00",
+              "OffColor": "#1a1a1a"
+            },
+            {
+              "UpTo": 24,
+              "Color": "#ff7700",
+              "OffColor": "#1a1a1a"
+            },
+            {
+              "UpTo": 32,
+              "Color": "#cc2200",
+              "OffColor": "#1a1a1a"
+            }
+          ],
+          "LabelX": 2,
+          "LabelY": 0,
+          "ValueX": 104,
+          "ValueY": -1,
+          "GraphY": 23,
+          "GraphX": 5
+        },
+        {
+          "SensorName": "Memory usage",
+          "Label": "VRAM",
+          "X": 0,
+          "Width": 106,
+          "ValueSize": 13,
+          "LabelSize": 13,
+          "LabelBold": true,
+          "ValueBold": true,
+          "Color": "#ffcc00",
+          "Format": "{0:F1}GB",
+          "GraphMin": 0,
+          "GraphMax": 16,
+          "Divisor": 1024,
+          "DynamicColor": "none",
+          "ColorRanges": [
+            {
+              "UpTo": 8,
+              "Color": "#ffcc00",
+              "OffColor": "#1a1a1a"
+            },
+            {
+              "UpTo": 12,
+              "Color": "#ff7700",
+              "OffColor": "#1a1a1a"
+            },
+            {
+              "UpTo": 16,
+              "Color": "#cc2200",
+              "OffColor": "#1a1a1a"
+            }
+          ],
+          "LabelX": 2,
+          "LabelY": 0,
+          "ValueX": 104,
+          "ValueY": -1,
+          "GraphY": 23,
+          "GraphX": 5
+        },
+        {
+          "SensorName": "Fan tachometer 2",
+          "Label": "FAN",
+          "X": 0,
+          "Width": 106,
+          "ValueSize": 13,
+          "LabelSize": 13,
+          "LabelBold": true,
+          "ValueBold": true,
+          "Color": "#ffcc00",
+          "Format": "{0:F0}RPM",
+          "GraphMin": 0,
+          "GraphMax": 3600,
+          "Divisor": 1,
+          "DynamicColor": "none",
+          "ColorRanges": [
+            {
+              "UpTo": 1500,
+              "Color": "#ffcc00",
+              "OffColor": "#1a1a1a"
+            },
+            {
+              "UpTo": 2500,
+              "Color": "#ff7700",
+              "OffColor": "#1a1a1a"
+            },
+            {
+              "UpTo": 3600,
+              "Color": "#cc2200",
+              "OffColor": "#1a1a1a"
+            }
+          ],
+          "LabelX": 2,
+          "LabelY": 0,
+          "ValueX": 104,
+          "ValueY": -1,
+          "GraphY": 23,
+          "GraphX": 5
+        },
+        {
+          "SensorName": "Framerate",
+          "Label": "FPS",
+          "X": 0,
+          "Width": 106,
+          "ValueSize": 13,
+          "LabelSize": 13,
+          "LabelBold": true,
+          "ValueBold": true,
+          "Color": "#ffcc00",
+          "Format": "{0:F0}",
+          "GraphMin": 0,
+          "GraphMax": 240,
+          "Divisor": 1,
+          "DynamicColor": "none",
+          "ColorRanges": [
+            {
+              "UpTo": 60,
+              "Color": "#cc2200",
+              "OffColor": "#1a1a1a"
+            },
+            {
+              "UpTo": 120,
+              "Color": "#ff7700",
+              "OffColor": "#1a1a1a"
+            },
+            {
+              "UpTo": 240,
+              "Color": "#ffcc00",
+              "OffColor": "#1a1a1a"
+            }
+          ],
+          "LabelX": 2,
+          "LabelY": 0,
+          "ValueX": 104,
+          "ValueY": -1,
+          "GraphY": 23,
+          "GraphX": 5
+        }
+      ]
+    },
+    {
+      "Page": 1,
+      "Background": "#000000",
+      "LabelColor": "#aaaaaa",
+      "ValueColor": "#aaaaaa",
+      "LedColor": "#ff3000",
+      "PanelBorder": "#111111",
+      "LedOffColor": "#2a1000",
+      "LedCount": 14,
+      "LedWidth": 5,
+      "LedGap": 2,
+      "LedHeight": 24,
+      "LedStyle": "segments",
+      "LedGlow": true,
+      "LedHighlight": false,
+      "LedGradientTop": 0.0,
+      "LedGradientMid": 0.0,
+      "LedGradientBottom": 0.0,
+      "Items": [
+        {
+          "SensorName": "CPU usage",
+          "Label": "Load",
+          "X": 0,
+          "Width": 106,
+          "ValueSize": 14,
+          "LabelSize": 14,
+          "LabelBold": true,
+          "ValueBold": true,
+          "Color": "#ffcc00",
+          "Format": "{0:F0}%",
+          "GraphMin": 0,
+          "GraphMax": 100,
+          "Divisor": 1,
+          "DynamicColor": "none",
+          "ColorRanges": [
+            {
+              "UpTo": 50,
+              "Color": "#ffcc00",
+              "OffColor": "#1a1a1a"
+            },
+            {
+              "UpTo": 80,
+              "Color": "#ff7700",
+              "OffColor": "#1a1a1a"
+            },
+            {
+              "UpTo": 100,
+              "Color": "#cc2200",
+              "OffColor": "#1a1a1a"
+            }
+          ],
+          "LabelX": 2,
+          "LabelY": 0,
+          "ValueX": 104,
+          "ValueY": 14,
+          "GraphY": 23,
+          "GraphX": 5
+        },
+        {
+          "SensorName": "CPU temperature",
+          "Label": "Temp",
+          "X": 0,
+          "Width": 106,
+          "ValueSize": 14,
+          "LabelSize": 14,
+          "LabelBold": true,
+          "ValueBold": true,
+          "Color": "#ffcc00",
+          "Format": "{0:F0}°",
+          "GraphMin": 0,
+          "GraphMax": 100,
+          "Divisor": 1,
+          "DynamicColor": "none",
+          "ColorRanges": [
+            {
+              "UpTo": 50,
+              "Color": "#ffcc00",
+              "OffColor": "#1a1a1a"
+            },
+            {
+              "UpTo": 80,
+              "Color": "#ff7700",
+              "OffColor": "#1a1a1a"
+            },
+            {
+              "UpTo": 100,
+              "Color": "#cc2200",
+              "OffColor": "#1a1a1a"
+            }
+          ],
+          "LabelX": 2,
+          "LabelY": 0,
+          "ValueX": 104,
+          "ValueY": 14,
+          "GraphY": 23,
+          "GraphX": 5
+        },
+        {
+          "SensorName": "Core clock",
+          "Label": "Clk",
+          "X": 0,
+          "Width": 106,
+          "ValueSize": 14,
+          "LabelSize": 14,
+          "LabelBold": true,
+          "ValueBold": true,
+          "Color": "#ffcc00",
+          "Format": "{0:F2}GHz",
+          "GraphMin": 0,
+          "GraphMax": 3,
+          "Divisor": 1000,
+          "DynamicColor": "none",
+          "ColorRanges": [
+            {
+              "UpTo": 1500,
+              "Color": "#ffcc00",
+              "OffColor": "#1a1a1a"
+            },
+            {
+              "UpTo": 2000,
+              "Color": "#ff7700",
+              "OffColor": "#1a1a1a"
+            },
+            {
+              "UpTo": 3100,
+              "Color": "#cc2200",
+              "OffColor": "#1a1a1a"
+            }
+          ],
+          "LabelX": 2,
+          "LabelY": 0,
+          "ValueX": 104,
+          "ValueY": 14,
+          "GraphY": 23,
+          "GraphX": 5
+        },
+        {
+          "SensorName": "Power",
+          "Label": "Power",
+          "X": 0,
+          "Width": 106,
+          "ValueSize": 14,
+          "LabelSize": 14,
+          "LabelBold": true,
+          "ValueBold": true,
+          "Color": "#ffcc00",
+          "Format": "{0:F0}W",
+          "GraphMin": 0,
+          "GraphMax": 350,
+          "Divisor": 1,
+          "DynamicColor": "none",
+          "ColorRanges": [
+            {
+              "UpTo": 50,
+              "Color": "#ffcc00",
+              "OffColor": "#1a1a1a"
+            },
+            {
+              "UpTo": 150,
+              "Color": "#ff7700",
+              "OffColor": "#1a1a1a"
+            },
+            {
+              "UpTo": 300,
+              "Color": "#cc2200",
+              "OffColor": "#1a1a1a"
+            }
+          ],
+          "LabelX": 2,
+          "LabelY": 0,
+          "ValueX": 104,
+          "ValueY": 14,
+          "GraphY": 23,
+          "GraphX": 5
+        },
+        {
+          "SensorName": "Memory usage",
+          "Label": "VRAM",
+          "X": 0,
+          "Width": 106,
+          "ValueSize": 14,
+          "LabelSize": 14,
+          "LabelBold": true,
+          "ValueBold": true,
+          "Color": "#ffcc00",
+          "Format": "{0:F1}GB",
+          "GraphMin": 0,
+          "GraphMax": 16,
+          "Divisor": 1024,
+          "DynamicColor": "none",
+          "ColorRanges": [
+            {
+              "UpTo": 8,
+              "Color": "#ffcc00",
+              "OffColor": "#1a1a1a"
+            },
+            {
+              "UpTo": 12,
+              "Color": "#ff7700",
+              "OffColor": "#1a1a1a"
+            },
+            {
+              "UpTo": 16,
+              "Color": "#cc2200",
+              "OffColor": "#1a1a1a"
+            }
+          ],
+          "LabelX": 2,
+          "LabelY": 0,
+          "ValueX": 104,
+          "ValueY": 14,
+          "GraphY": 23,
+          "GraphX": 5
+        },
+        {
+          "SensorName": "Framerate",
+          "Label": "FPS",
+          "X": 0,
+          "Width": 106,
+          "ValueSize": 14,
+          "LabelSize": 14,
+          "LabelBold": true,
+          "ValueBold": true,
+          "Color": "#ffcc00",
+          "Format": "{0:F0}",
+          "GraphMin": 0,
+          "GraphMax": 240,
+          "Divisor": 1,
+          "DynamicColor": "none",
+          "ColorRanges": [
+            {
+              "UpTo": 60,
+              "Color": "#cc2200",
+              "OffColor": "#1a1a1a"
+            },
+            {
+              "UpTo": 120,
+              "Color": "#ff7700",
+              "OffColor": "#1a1a1a"
+            },
+            {
+              "UpTo": 240,
+              "Color": "#ffcc00",
+              "OffColor": "#1a1a1a"
+            }
+          ],
+          "LabelX": 2,
+          "LabelY": 0,
+          "ValueX": 104,
+          "ValueY": 14,
+          "GraphY": 23,
+          "GraphX": 5
+        }
+      ]
+    }
+  ]
+}
