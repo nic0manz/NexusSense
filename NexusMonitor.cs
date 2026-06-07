@@ -177,7 +177,7 @@ public class NexusMonitor
     private readonly Nexus? _nexus;
     private MonitorConfig   _config;
 
-    private static string CONFIG_FILE = "nexus_config.json";
+    private static string CONFIG_FILE = Path.Combine(AppContext.BaseDirectory, "nexus_config.json");
 
     // Current page index; written by the touch thread, read by the render thread.
     private volatile int _currentPage = 0;
