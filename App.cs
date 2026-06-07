@@ -1,6 +1,7 @@
 using System.Runtime.InteropServices;
 using System.Drawing;
 using System.Windows.Forms;
+using Microsoft.Win32;
 using HidApi;
 
 namespace NexusSense;
@@ -58,10 +59,14 @@ public class App
         var menu = new ContextMenuStrip();
         menu.Items.Add("Exit", null, (_, _) =>
         {
+            TurnOffScreen();
             cts.Cancel();
             Application.Exit();
         });
         trayIcon.ContextMenuStrip = menu;
+
+        // Turn off the screen on Windows shutdown/logoff.
+        SystemEvents.SessionEnding += (_, _) => TurnOffScreen();
 
         // Double-click on tray icon → show a brief tooltip.
         trayIcon.DoubleClick += (_, _) =>
@@ -76,6 +81,25 @@ public class App
 
         trayIcon.Visible = false;
         return 0;
+    }
+
+    /// <summary>Sets brightness to 0 on all connected Nexus devices.</summary>
+    private static void TurnOffScreen()
+    {
+        try
+        {
+            foreach (DeviceInfo deviceInfo in Hid.Enumerate())
+            {
+                if (deviceInfo.VendorId  != 0x1b1c ||
+                    deviceInfo.ProductId != 0x1b8e ||
+                    deviceInfo.UsagePage != 12)
+                    continue;
+
+                using Device device = deviceInfo.ConnectToDevice();
+                new Nexus(device).SetBrightness(0);
+            }
+        }
+        catch { }
     }
 
     private static void MonitorLoop(CancellationToken ct)
