@@ -163,6 +163,12 @@ public class MonitorConfig
     /// <summary>Path to a bold TrueType font file used when <see cref="MonitorItem.LabelBold"/> or <see cref="MonitorItem.ValueBold"/> is set.</summary>
     public string?           BoldFont    { get; set; } = null;
 
+    /// <summary>Path to an animated GIF to play on startup before the monitor loop begins. Null = skip.</summary>
+    public string?           StartupGif      { get; set; } = null;
+
+    /// <summary>How many milliseconds to play the startup GIF. 0 = play once through. Default 0.</summary>
+    public int               StartupGifDuration { get; set; } = 0;
+
     /// <summary>Pages, each with their own visual settings and sensor items.</summary>
     public List<PageConfig>  Pages       { get; set; } = [];
 }
@@ -365,6 +371,17 @@ public class NexusMonitor
     {
         if (App.Debug) Console.WriteLine("Live monitor started.");
 
+        // Force a config load before playing the startup GIF so the path is up to date.
+        ReloadConfigIfChanged();
+
+        if (_config.Brightness.HasValue)
+            _nexus!.SetBrightness(_config.Brightness.Value);
+
+        // Play startup GIF before entering the monitor loop.
+        if (!string.IsNullOrEmpty(_config.StartupGif) && File.Exists(_config.StartupGif))
+            PlayStartupGif(_config.StartupGif, ct);
+        else if (App.Debug) Console.WriteLine($"StartupGif skipped: path='{_config.StartupGif}'");
+
         // Start touch-input handling on a daemon thread so it does not block shutdown.
         var touchThread = new Thread(() => TouchLoop(ct)) { IsBackground = true };
         touchThread.Start();
@@ -381,14 +398,14 @@ public class NexusMonitor
                 // Apply brightness only when it changes to avoid redundant HID writes.
                 if (_config.Brightness.HasValue && _config.Brightness != lastBrightness)
                 {
-                    _nexus.SetBrightness(_config.Brightness.Value);
+                    _nexus!.SetBrightness(_config.Brightness.Value);
                     lastBrightness = _config.Brightness;
                 }
 
                 var sensors = AfterburnerReader.ReadAll();
                 // Render directly to raw RGBA and upload — no temp file involved.
                 byte[] raw = RenderFrame(sensors, _currentPage);
-                _nexus.UploadImage(raw);
+                _nexus!.UploadImage(raw);
             }
             catch (Exception ex)
             {
@@ -678,6 +695,84 @@ public class NexusMonitor
         }
 
         return bmp;
+    }
+
+    // -------------------------------------------------------------------------
+    // Startup GIF
+    // -------------------------------------------------------------------------
+
+    /// <summary>
+    /// Plays an animated GIF on the LCD once, respecting per-frame delays.
+    /// Each frame is scaled/cropped to 640×48 before upload.
+    /// Stops early if <paramref name="ct"/> is cancelled.
+    /// </summary>
+    /// <summary>Plays a GIF once on the LCD and returns. Used by the -g CLI flag.</summary>
+    public void PlayGifOnce(string path) => PlayStartupGif(path, CancellationToken.None);
+
+    private void PlayStartupGif(string path, CancellationToken ct)
+    {
+        try
+        {
+            using var gif       = System.Drawing.Image.FromFile(path);
+
+            // Skip if the GIF is larger than the display.
+            if (gif.Width > 640 || gif.Height > 48)
+            {
+                if (App.Debug) Console.WriteLine($"StartupGif skipped: {gif.Width}x{gif.Height} exceeds 640x48.");
+                return;
+            }
+
+            var   dimension  = new System.Drawing.Imaging.FrameDimension(gif.FrameDimensionsList[0]);
+            int   frameCount = gif.GetFrameCount(dimension);
+            byte[] delayData = gif.GetPropertyItem(0x5100)!.Value!;
+
+            // Center offset on the 640×48 display.
+            int offsetX = (640 - gif.Width)  / 2;
+            int offsetY = (48  - gif.Height) / 2;
+
+            DateTime expiry = _config.StartupGifDuration > 0
+                ? DateTime.UtcNow.AddMilliseconds(_config.StartupGifDuration)
+                : DateTime.MinValue; // play once
+
+            bool playOnce = _config.StartupGifDuration <= 0;
+
+            do
+            {
+                for (int i = 0; i < frameCount && !ct.IsCancellationRequested; i++)
+                {
+                    if (!playOnce && DateTime.UtcNow >= expiry) return;
+
+                    gif.SelectActiveFrame(dimension, i);
+
+                    // Compose frame centered on black background.
+                    using var frame = new Bitmap(640, 48, PixelFormat.Format32bppArgb);
+                    using var g     = Graphics.FromImage(frame);
+                    g.Clear(Color.Black);
+                    g.DrawImage(gif, offsetX, offsetY, gif.Width, gif.Height);
+
+                    _nexus?.UploadImage(BitmapToRgba(frame));
+
+                    int delay = BitConverter.ToInt32(delayData, i * 4) * 10; // 1/100s → ms
+                    if (delay <= 0) delay = 100;
+                    Thread.Sleep(delay);
+                }
+            }
+            while (!playOnce && DateTime.UtcNow < expiry && !ct.IsCancellationRequested);
+        }
+        catch (Exception ex)
+        {
+            if (App.Debug) Console.WriteLine($"GIF error: {ex.Message}");
+        }
+    }
+
+    /// <summary>Converts a 640×48 bitmap to a raw RGBA byte array for LCD upload.</summary>
+    private static byte[] BitmapToRgba(Bitmap bmp)
+    {
+        var    data = bmp.LockBits(new Rectangle(0, 0, 640, 48), ImageLockMode.ReadOnly, PixelFormat.Format32bppArgb);
+        byte[] buf  = new byte[640 * 48 * 4];
+        try   { Marshal.Copy(data.Scan0, buf, 0, buf.Length); }
+        finally { bmp.UnlockBits(data); }
+        return buf;
     }
 
     // -------------------------------------------------------------------------

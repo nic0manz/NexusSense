@@ -16,20 +16,35 @@ public class App
     [DllImport("user32.dll")]   private static extern bool  ShowWindow(IntPtr hWnd, int nCmdShow);
     private const int SW_HIDE = 0;
 
+    private static Mutex? _mutex;
+
     public static int Main(string[] argv)
     {
-        bool sensors = false;
-        bool help    = false;
-
-        foreach (var arg in argv)
+        // Ensure only one instance is running.
+        _mutex = new Mutex(true, "NexusSense_SingleInstance", out bool isNew);
+        if (!isNew)
         {
-            if (arg is "-d" or "--debug")   Debug   = true;
-            if (arg is "-s" or "--sensors") sensors = true;
-            if (arg is "-h" or "--help")    help    = true;
+            MessageBox.Show("NexusSense is already running.", "NexusSense",
+                MessageBoxButtons.OK, MessageBoxIcon.Information);
+            return 1;
+        }
+
+        bool   sensors = false;
+        bool   help    = false;
+        string? gifPath = null;
+
+        for (int i = 0; i < argv.Length; i++)
+        {
+            if (argv[i] is "-d" or "--debug")   Debug   = true;
+            if (argv[i] is "-s" or "--sensors") sensors = true;
+            if (argv[i] is "-h" or "--help")    help    = true;
+            if ((argv[i] is "-g" or "--gif") && i + 1 < argv.Length)
+                gifPath = argv[++i];
         }
 
         if (help)    { PrintHelp(); return 0; }
         if (sensors) { PrintSensors(); return 0; }
+        if (gifPath  != null) { PlayGif(gifPath); return 0; }
 
         // Hide the console window unless debug mode is active.
         if (!Debug)
@@ -96,7 +111,9 @@ public class App
                     continue;
 
                 using Device device = deviceInfo.ConnectToDevice();
-                new Nexus(device).SetBrightness(0);
+                var nexus = new Nexus(device);
+                nexus.UploadImage(new byte[640 * 48 * 4]);
+                nexus.SetBrightness(0);
             }
         }
         catch { }
@@ -138,6 +155,32 @@ public class App
         }
     }
 
+    private static void PlayGif(string path)
+    {
+        if (!File.Exists(path)) { Console.WriteLine($"File not found: {path}"); return; }
+
+        try
+        {
+            foreach (DeviceInfo deviceInfo in Hid.Enumerate())
+            {
+                if (deviceInfo.VendorId  != 0x1b1c ||
+                    deviceInfo.ProductId != 0x1b8e ||
+                    deviceInfo.UsagePage != 12)
+                    continue;
+
+                using Device device = deviceInfo.ConnectToDevice();
+                var nexus   = new Nexus(device);
+                nexus.SetBrightness(100);
+                var monitor = new NexusMonitor(nexus);
+                monitor.PlayGifOnce(path);
+                return;
+            }
+            Console.WriteLine("Nexus device not found.");
+        }
+        catch (Exception ex) { Console.WriteLine(ex.Message); }
+        finally { Hid.Exit(); }
+    }
+
     private static void PrintSensors()
     {
         Console.WriteLine("Available Afterburner sensors:");
@@ -150,6 +193,7 @@ public class App
         Console.WriteLine();
         Console.WriteLine("  -d  --debug     Show console messages");
         Console.WriteLine("  -s  --sensors   List all Afterburner sensors with ID");
+        Console.WriteLine("  -g  --gif PATH  Play a GIF on the Nexus screen and exit");
         Console.WriteLine("  -h  --help      Show this help");
         Console.WriteLine();
         Console.WriteLine("Double-click the exe to start. Minimizes to system tray.");

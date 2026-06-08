@@ -40,12 +40,13 @@ dotnet build NexusSense.csproj
 Double-click `NexusSense.exe` to start. The app hides the console window and runs as a **system tray** application. Right-click the tray icon → **Exit** to quit.
 
 ```
-NexusSense.exe            Start (minimizes to system tray)
-NexusSense.exe -d         Start with debug console visible
-NexusSense.exe -s         List all available Afterburner sensor names and IDs, then exit
-NexusSense.exe -h         Show help and exit
+NexusSense.exe               Start (minimizes to system tray)
+NexusSense.exe -d            Start with debug console visible
+NexusSense.exe -s            List all available Afterburner sensor names and IDs, then exit
+NexusSense.exe -g <path>     Play a GIF on the Nexus screen and exit
+NexusSense.exe -h            Show help and exit
 
-Long forms: --debug, --sensors, --help
+Long forms: --debug, --sensors, --gif, --help
 ```
 
 > **Tip:** run with `-s` / `--sensors` first to see every sensor name exposed by Afterburner. Use those exact strings in `SensorName` fields of the config.
@@ -68,7 +69,28 @@ If the file is missing on first launch, a default config with six common sensors
 | `BoldFont` | `C:\Windows\Fonts\segoeuib.ttf` | Path to a `.ttf` file used when `LabelBold`/`ValueBold` is true |
 | `PageNavigation` | `"both"` | Touch gesture mode (see below) |
 | `TapZoneWidth` | `128` | Width in pixels of the left/right tap zones |
+| `StartupGif` | `null` | Path to an animated GIF to play on startup. Null = skip. |
+| `StartupGifDuration` | `0` | How long to play the GIF in milliseconds. `0` = play once through. |
 | `Pages` | `[]` | Array of page configs, each with its own items and visual settings |
+
+### Startup GIF
+
+An optional animated GIF displayed on the LCD before the sensor monitor starts.
+The GIF is centered on the 640×48 display without resizing — images larger than 640×48 are skipped.
+
+```json
+"StartupGif": "C:\\Users\\Nico\\Desktop\\loading.gif",
+"StartupGifDuration": 2000
+```
+
+Use `StartupGifDuration: 0` to play the GIF exactly once, or set a duration in ms to loop it for that long (useful for GIFs shorter than the boot time).
+
+Example GIFs included in the repo:
+
+| | |
+|---|---|
+| ![loading bar](screenshots/loading.gif) | ![loading circle](screenshots/loading_cicle.gif) |
+| ![loading segmented](screenshots/loading_segmented.gif) | ![loading pulse](screenshots/loading_pulse.gif) |
 
 ### Page navigation
 
