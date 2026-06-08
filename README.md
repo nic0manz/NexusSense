@@ -8,13 +8,13 @@ Sensors, layout, colors and LED bar style are fully configurable via a JSON file
 
 | | | | |
 |---|---|---|---|
-| ![](screenshots/1_segments_flat.png) | ![](screenshots/2_bar_flat.png) | ![](screenshots/3_segments_grad.png) | ![](screenshots/4_bar_grad.png) |
-| ![](screenshots/5_seg_glow_hi_grad.png) | ![](screenshots/6_bar_glow_hi_grad.png) | ![](screenshots/dc_none.png) | ![](screenshots/dc_both.png) |
+| ![](assets/1_segments_flat.png) | ![](assets/2_bar_flat.png) | ![](assets/3_segments_grad.png) | ![](assets/4_bar_grad.png) |
+| ![](assets/5_seg_glow_hi_grad.png) | ![](assets/6_bar_glow_hi_grad.png) | ![](assets/dc_none.png) | ![](assets/dc_both.png) |
 
 | | |
 |---|---|
-| ![](screenshots/screenshot_p1_seg_nogradient.png) | ![](screenshots/screenshot_p1_bar_gradient.png) |
-| ![](screenshots/screenshot_p1_seg_green.png) | ![](screenshots/screenshot_p1_seg_blue.png) |
+| ![](assets/screenshot_p1_seg_nogradient.png) | ![](assets/screenshot_p1_bar_gradient.png) |
+| ![](assets/screenshot_p1_seg_green.png) | ![](assets/screenshot_p1_seg_blue.png) |
 
 ---
 
@@ -89,8 +89,8 @@ Example GIFs included in the repo:
 
 | | |
 |---|---|
-| ![loading bar](screenshots/loading.gif) | ![loading circle](screenshots/loading_cicle.gif) |
-| ![loading segmented](screenshots/loading_segmented.gif) | ![loading pulse](screenshots/loading_pulse.gif) |
+| ![loading bar](assets/loading.gif) | ![loading circle](assets/loading_cicle.gif) |
+| ![loading segmented](assets/loading_segmented.gif) | ![loading pulse](assets/loading_pulse.gif) |
 
 ### Page navigation
 
